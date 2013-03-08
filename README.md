@@ -1,4 +1,4 @@
-php-phar-update
-===============
+Phar Update
+===========
 
 A library for self-updating Phars.
