@@ -25,6 +25,7 @@
         "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
+        "files": ["src/lib/constants.php"],
         "psr-0": {
             "Herrera\\Phar\\Update": "src/lib"
         }
