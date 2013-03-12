@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Herrera\\Cli": "src/lib"
+            "Herrera\\Phar\\Update": "src/lib"
         }
     },
     "config": {
