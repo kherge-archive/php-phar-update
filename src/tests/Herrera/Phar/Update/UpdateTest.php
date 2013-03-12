@@ -163,7 +163,7 @@ PUBLIC
 
         $this->setExpectedException(
             'Herrera\\Phar\\Update\\Exception\\FileException',
-            'Invalid argument'
+            'rmdir'
         );
 
         $this->update->deleteFile();
