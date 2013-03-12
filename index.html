@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Phar Update by herrera-io</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Phar Update</h1>
+        <p>A library for self-updating Phars.</p>
+
+        <p class="view"><a href="https://github.com/herrera-io/php-phar-update">View the Project on GitHub <small>herrera-io/php-phar-update</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/herrera-io/php-phar-update/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/herrera-io/php-phar-update/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/herrera-io/php-phar-update">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><a href="https://travis-ci.org/herrera-io/php-phar-update"><img src="https://travis-ci.org/herrera-io/php-phar-update.png?branch=master" alt="Build Status"></a></p>
+
+<h2>Summary</h2>
+
+<p>This library handles the updating of applications packaged as distributable Phars. The modular design allows for a more customizable update process.</p>
+
+<h2>Installation</h2>
+
+<p>Add it to your list of Composer dependencies:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>composer require herrera-io/phar-update<span class="o">=</span>1.*
+</pre></div>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">use</span> <span class="nx">Herrera\Phar\Update\Manager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Herrera\Phar\Update\Manifest</span><span class="p">;</span>
+
+<span class="nv">$manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">(</span><span class="nx">Manifest</span><span class="o">::</span><span class="na">loadFile</span><span class="p">(</span>
+    <span class="s1">'http://box-project.org/manifest.json'</span>
+<span class="p">));</span>
+
+<span class="c1">// update to the next available 1.x update</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">'1.0.0'</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/herrera-io">herrera-io</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
