@@ -92,10 +92,16 @@ PUBLIC
         $file = $this->createPhar();
         $target = $this->createFile('taco.phar');
 
+        chmod($file, 0755);
+
         $this->update->copyTo($target);
 
         $this->assertFileEquals($file, $target);
         $this->assertFileEquals($file . '.pubkey', $target . '.pubkey');
+
+        if (false === strpos(strtolower(PHP_OS), 'win')) {
+            $this->assertEquals(0755, fileperms($file) & 511);
+        }
     }
 
     public function testCopyToNotDownloaded()
