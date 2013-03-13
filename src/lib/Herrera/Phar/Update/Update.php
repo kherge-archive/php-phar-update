@@ -139,6 +139,12 @@ class Update
                 }
             }
 
+            if (file_exists($this->file . '.pubkey')) {
+                if (false === @unlink($this->file . '.pubkey')) {
+                    throw FileException::lastError();
+                }
+            }
+
             $dir = dirname($this->file);
 
             if (file_exists($dir)) {
@@ -219,6 +225,16 @@ class Update
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Returns the URL where the public key can be downloaded from.
+     *
+     * @return string The URL.
+     */
+    public function getPublicKey()
+    {
+        return $this->publicKey;
     }
 
     /**
