@@ -230,6 +230,14 @@ PUBLIC
         $this->assertEquals('test.phar', $this->update->getName());
     }
 
+    public function testGetPublicKey()
+    {
+        $this->assertEquals(
+            'http://example.com/test-1.2.3.phar.pubkey',
+            $this->update->getPublicKey()
+        );
+    }
+
     public function testGetSha1()
     {
         $this->assertEquals(
@@ -262,7 +270,8 @@ PUBLIC
             'test.phar',
             '1234567890123456789012345678901234567890',
             'http://example.com/test.phar',
-            $this->version = Version::create('1.2.3')
+            $this->version = Version::create('1.2.3'),
+            'http://example.com/test-1.2.3.phar.pubkey'
         );
     }
 }
