@@ -120,7 +120,8 @@ class Manifest
                 $update->name,
                 $update->sha1,
                 $update->url,
-                Version::create($update->version)
+                Version::create($update->version),
+                isset($update->publicKey) ? $update->publicKey : null
             );
         }
 

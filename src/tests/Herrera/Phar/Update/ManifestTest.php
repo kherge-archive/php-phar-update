@@ -47,12 +47,14 @@ class ManifestTest extends TestCase
         $data = json_encode(array(
             array(
                 'name' => 'test.phar',
+                'publicKey' => 'http://example.com/test-1.2.3.phar.pubkey',
                 'sha1' => 'abcdefabcdefabcdefabcdefabcdefabcdefabcd',
                 'url' => 'http://example.com/test-1.2.3.phar',
-                'version' => '1.2.3'
+                'version' => '1.2.3',
             ),
             array(
                 'name' => 'test.phar',
+                'publicKey' => 'http://example.com/test-4.5.6.phar.pubkey',
                 'sha1' => '0123456789012345678901234567890123456789',
                 'url' => 'http://example.com/test-4.5.6.phar',
                 'version' => '4.5.6'
@@ -67,12 +69,12 @@ class ManifestTest extends TestCase
         }
 
         $this->assertEquals(
-            '0123456789012345678901234567890123456789',
-            $updates[0]->getSha1()
+            'http://example.com/test-4.5.6.phar.pubkey',
+            $updates[0]->getPublicKey()
         );
         $this->assertEquals(
-            'abcdefabcdefabcdefabcdefabcdefabcdefabcd',
-            $updates[1]->getSha1()
+            'http://example.com/test-1.2.3.phar.pubkey',
+            $updates[1]->getPublicKey()
         );
     }
 
