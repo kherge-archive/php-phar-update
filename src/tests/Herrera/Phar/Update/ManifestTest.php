@@ -17,13 +17,27 @@ class ManifestTest extends TestCase
     private $v1;
 
     /** @var Update */
+    private $v1p;
+
+    /** @var Update */
     private $v2;
 
     public function testFindRecent()
     {
         $version = Version::create('1.0.0');
 
-        $this->assertSame($this->v1, $this->manifest->findRecent($version, true));
+        $this->assertSame(
+            $this->v1,
+            $this->manifest->findRecent($version, true)
+        );
+        $this->assertSame(
+            $this->v1p,
+            $this->manifest->findRecent(
+                Version::create('2.0.0-alpha.1'),
+                true,
+                true
+            )
+        );
         $this->assertSame($this->v2, $this->manifest->findRecent($version));
     }
 
@@ -37,7 +51,7 @@ class ManifestTest extends TestCase
     public function testGetUpdates()
     {
         $this->assertSame(
-            array($this->v1, $this->v2),
+            array($this->v1, $this->v1p, $this->v2),
             $this->manifest->getUpdates()
         );
     }
@@ -121,6 +135,13 @@ class ManifestTest extends TestCase
             Version::create('1.2.3')
         );
 
+        $this->v1p = new Update(
+            'test.phar',
+            '0123456789012345678901234567890123456789',
+            'http://example.com/test.phar',
+            Version::create('2.0.0-alpha.2')
+        );
+
         $this->v2 = new Update(
             'test.phar',
             '0123456789012345678901234567890123456789',
@@ -130,6 +151,7 @@ class ManifestTest extends TestCase
 
         $this->manifest = new Manifest(array(
             $this->v1,
+            $this->v1p,
             $this->v2
         ));
     }

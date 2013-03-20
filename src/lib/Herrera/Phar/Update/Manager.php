@@ -84,18 +84,23 @@ class Manager
     /**
      * Updates the running Phar if any is available.
      *
-     * @param string|Version $version The current version.
-     * @param boolean        $major   Lock to current major version?
+     * @param string|Version $version  The current version.
+     * @param boolean        $major    Lock to current major version?
+     * @param boolean        $pre      Allow pre-releases?
      *
      * @return boolean TRUE if an update was performed, FALSE if none available.
      */
-    public function update($version, $major = false)
+    public function update($version, $major = false, $pre = false)
     {
         if (false === ($version instanceof Version)) {
             $version = Version::create($version);
         }
 
-        if (null !== ($update = $this->manifest->findRecent($version, $major))) {
+        if (null !== ($update = $this->manifest->findRecent(
+            $version,
+            $major,
+            $pre
+        ))){
             $update->getFile();
             $update->copyTo($this->getRunningFile());
 

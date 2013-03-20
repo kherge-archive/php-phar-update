@@ -34,10 +34,11 @@ class Manifest
      *
      * @param Version $version The current version.
      * @param boolean $major   Lock to major version?
+     * @param boolean $pre     Allow pre-releases?
      *
      * @return Update The update.
      */
-    public function findRecent(Version $version, $major = false)
+    public function findRecent(Version $version, $major = false, $pre = false)
     {
         /** @var $current Update */
         $current = null;
@@ -45,6 +46,11 @@ class Manifest
 
         foreach ($this->updates as $update) {
             if ($major && ($major !== $update->getVersion()->getMajor())) {
+                continue;
+            }
+
+            if ((false === $pre)
+                && (null !== $update->getVersion()->getPreRelease())) {
                 continue;
             }
 
