@@ -205,6 +205,7 @@ PUBLIC
 
         file_put_contents($file, '<?php echo "Hello, world!\n";');
 
+        $this->setPropertyValue($this->update, 'publicKey', null);
         $this->setPropertyValue($this->update, 'sha1', sha1_file($file));
         $this->setPropertyValue($this->update, 'url', $file);
 
@@ -219,6 +220,7 @@ PUBLIC
 
         file_put_contents($file, 'test');
 
+        $this->setPropertyValue($this->update, 'publicKey', null);
         $this->setPropertyValue($this->update, 'url', $file);
 
         $this->setExpectedException(
