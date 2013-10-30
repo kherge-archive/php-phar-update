@@ -223,9 +223,7 @@ PUBLIC
 
         $this->setExpectedException(
             'Herrera\\Phar\\Update\\Exception\\FileException',
-            'Mismatch of the SHA1 checksum (1234567890123456789012345678901234567890) of the downloaded file ('
-                . sha1_file($file)
-                . ').'
+            'Mismatch of the SHA1 checksum (1234567890123456789012345678901234567890) of the downloaded file (' . sha1_file($file) . ').'
         );
 
         $this->update->getFile();

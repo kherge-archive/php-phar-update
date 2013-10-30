@@ -100,7 +100,7 @@ class Manager
             $version,
             $major,
             $pre
-        ))){
+        ))) {
             $update->getFile();
             $update->copyTo($this->getRunningFile());
 
