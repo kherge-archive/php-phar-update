@@ -3,7 +3,9 @@
 namespace Herrera\Phar\Update;
 
 use Herrera\Json\Json;
-use KevinGH\Version\Version;
+use Herrera\Version\Comparator;
+use Herrera\Version\Parser;
+use Herrera\Version\Version;
 
 /**
  * Manages the contents of an updates manifest file.
@@ -50,7 +52,7 @@ class Manifest
             }
 
             if ((false === $pre)
-                && (null !== $update->getVersion()->getPreRelease())) {
+                && !$update->getVersion()->isStable()) {
                 continue;
             }
 
@@ -126,14 +128,20 @@ class Manifest
                 $update->name,
                 $update->sha1,
                 $update->url,
-                Version::create($update->version),
+                Parser::toVersion($update->version),
                 isset($update->publicKey) ? $update->publicKey : null
             );
         }
 
-        usort($updates, function (Update $a, Update $b) {
-            return $a->getVersion()->compareTo($b->getVersion());
-        });
+        usort(
+            $updates,
+            function (Update $a, Update $b) {
+                return Comparator::isGreaterThan(
+                    $a->getVersion(),
+                    $b->getVersion()
+                );
+            }
+        );
 
         return new static($updates);
     }

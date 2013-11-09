@@ -6,7 +6,7 @@ use Herrera\Phar\Update\Manifest;
 use Herrera\Json\Exception\JsonException;
 use Herrera\Phar\Update\Update;
 use Herrera\PHPUnit\TestCase;
-use KevinGH\Version\Version;
+use Herrera\Version\Parser;
 
 class ManifestTest extends TestCase
 {
@@ -24,7 +24,7 @@ class ManifestTest extends TestCase
 
     public function testFindRecent()
     {
-        $version = Version::create('1.0.0');
+        $version = Parser::toVersion('1.0.0');
 
         $this->assertSame(
             $this->v1,
@@ -33,7 +33,7 @@ class ManifestTest extends TestCase
         $this->assertSame(
             $this->v1p,
             $this->manifest->findRecent(
-                Version::create('2.0.0-alpha.1'),
+                Parser::toVersion('2.0.0-alpha.1'),
                 true,
                 true
             )
@@ -44,7 +44,7 @@ class ManifestTest extends TestCase
     public function testFindRecentNone()
     {
         $this->assertNull(
-            $this->manifest->findRecent(Version::create('5.0.0'))
+            $this->manifest->findRecent(Parser::toVersion('5.0.0'))
         );
     }
 
@@ -83,11 +83,11 @@ class ManifestTest extends TestCase
         }
 
         $this->assertEquals(
-            'http://example.com/test-4.5.6.phar.pubkey',
+            'http://example.com/test-1.2.3.phar.pubkey',
             $updates[0]->getPublicKey()
         );
         $this->assertEquals(
-            'http://example.com/test-1.2.3.phar.pubkey',
+            'http://example.com/test-4.5.6.phar.pubkey',
             $updates[1]->getPublicKey()
         );
     }
@@ -117,11 +117,11 @@ class ManifestTest extends TestCase
         }
 
         $this->assertEquals(
-            '0123456789012345678901234567890123456789',
+            'abcdefabcdefabcdefabcdefabcdefabcdefabcd',
             $updates[0]->getSha1()
         );
         $this->assertEquals(
-            'abcdefabcdefabcdefabcdefabcdefabcdefabcd',
+            '0123456789012345678901234567890123456789',
             $updates[1]->getSha1()
         );
     }
@@ -132,21 +132,21 @@ class ManifestTest extends TestCase
             'test.phar',
             '0123456789012345678901234567890123456789',
             'http://example.com/test.phar',
-            Version::create('1.2.3')
+            Parser::toVersion('1.2.3')
         );
 
         $this->v1p = new Update(
             'test.phar',
             '0123456789012345678901234567890123456789',
             'http://example.com/test.phar',
-            Version::create('2.0.0-alpha.2')
+            Parser::toVersion('2.0.0-alpha.2')
         );
 
         $this->v2 = new Update(
             'test.phar',
             '0123456789012345678901234567890123456789',
             'http://example.com/test.phar',
-            Version::create('4.5.6')
+            Parser::toVersion('4.5.6')
         );
 
         $this->manifest = new Manifest(array(

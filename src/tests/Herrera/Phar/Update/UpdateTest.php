@@ -4,7 +4,8 @@ namespace Herrera\Phar\Update\Tests;
 
 use Herrera\Phar\Update\Update;
 use Herrera\PHPUnit\TestCase;
-use KevinGH\Version\Version;
+use Herrera\Version\Parser;
+use Herrera\Version\Version;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Phar;
@@ -267,7 +268,7 @@ PUBLIC
 
     public function testIsNewer()
     {
-        $this->assertTrue($this->update->isNewer(Version::create('1.0.0')));
+        $this->assertTrue($this->update->isNewer(Parser::toVersion('1.0.0')));
     }
 
     protected function setUp()
@@ -276,7 +277,7 @@ PUBLIC
             'test.phar',
             '1234567890123456789012345678901234567890',
             'http://example.com/test.phar',
-            $this->version = Version::create('1.2.3'),
+            $this->version = Parser::toVersion('1.2.3'),
             'http://example.com/test-1.2.3.phar.pubkey'
         );
     }

@@ -4,7 +4,8 @@ namespace Herrera\Phar\Update;
 
 use Herrera\Phar\Update\Exception\FileException;
 use Herrera\Phar\Update\Exception\LogicException;
-use KevinGH\Version\Version;
+use Herrera\Version\Comparator;
+use Herrera\Version\Version;
 use Phar;
 use SplFileObject;
 use UnexpectedValueException;
@@ -276,6 +277,6 @@ class Update
      */
     public function isNewer(Version $version)
     {
-        return $this->version->isGreaterThan($version);
+        return Comparator::isGreaterThan($this->version, $version);
     }
 }

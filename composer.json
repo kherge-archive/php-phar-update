@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.3.3",
         "herrera-io/json": "1.*",
-        "kherge/version": "1.*"
+        "herrera-io/version": "1.*"
     },
     "require-dev": {
         "herrera-io/phpunit-test-case": "1.*",

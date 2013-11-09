@@ -2,9 +2,9 @@
 
 namespace Herrera\Phar\Update;
 
-use Herrera\Phar\Update\Exception\FileException;
 use Herrera\Phar\Update\Exception\InvalidArgumentException;
-use KevinGH\Version\Version;
+use Herrera\Version\Parser;
+use Herrera\Version\Version;
 
 /**
  * Manages the Phar update process.
@@ -93,7 +93,7 @@ class Manager
     public function update($version, $major = false, $pre = false)
     {
         if (false === ($version instanceof Version)) {
-            $version = Version::create($version);
+            $version = Parser::toVersion($version);
         }
 
         if (null !== ($update = $this->manifest->findRecent(

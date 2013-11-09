@@ -5,7 +5,7 @@ namespace Herrera\Phar\Update;
 use Herrera\Phar\Update\Manager;
 use Herrera\Phar\Update\Update;
 use Herrera\PHPUnit\TestCase;
-use KevinGH\Version\Version;
+use Herrera\Version\Parser;
 use Phar;
 
 class ManagerTest extends TestCase
@@ -73,7 +73,7 @@ class ManagerTest extends TestCase
             'new.phar',
             sha1_file($newFile),
             $newFile,
-            Version::create('1.0.1')
+            Parser::toVersion('1.0.1')
         ))));
 
         $manager->setRunningFile($currentFile);
@@ -88,7 +88,7 @@ class ManagerTest extends TestCase
             'new.phar',
             'test',
             'test',
-            Version::create('2.0.1')
+            Parser::toVersion('2.0.1')
         ))));
 
         $manager->setRunningFile($this->createFile());
