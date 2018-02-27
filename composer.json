@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "herrera-io/json": "1.*",
+        "herrera-io/json": "2.*",
         "herrera-io/version": "1.*"
     },
     "require-dev": {

@@ -2,10 +2,10 @@
 
 namespace Herrera\Phar\Update;
 
-use Herrera\Json\Json;
 use Herrera\Version\Comparator;
 use Herrera\Version\Parser;
 use Herrera\Version\Version;
+use KHerGe\JSON\JSON;
 
 /**
  * Manages the contents of an updates manifest file.
@@ -87,7 +87,7 @@ class Manifest
      */
     public static function load($json)
     {
-        $j = new Json();
+        $j = new JSON();
 
         return self::create($j->decode($json), $j);
     }
@@ -101,7 +101,7 @@ class Manifest
      */
     public static function loadFile($file)
     {
-        $json = new Json();
+        $json = new JSON();
 
         return self::create($json->decodeFile($file), $json);
     }
