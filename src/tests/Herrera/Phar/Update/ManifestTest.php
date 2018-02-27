@@ -3,10 +3,10 @@
 namespace Herrera\Phar\Update\Tests;
 
 use Herrera\Phar\Update\Manifest;
-use Herrera\Json\Exception\JsonException;
 use Herrera\Phar\Update\Update;
 use Herrera\PHPUnit\TestCase;
 use Herrera\Version\Parser;
+use KHerGe\JSON\Exception\Exception as JSONException;
 
 class ManifestTest extends TestCase
 {
@@ -77,7 +77,7 @@ class ManifestTest extends TestCase
 
         try {
             $updates = Manifest::load($data)->getUpdates();
-        } catch (JsonException $exception) {
+        } catch (JSONException $exception) {
             print_r($exception->getErrors());
             throw $exception;
         }
@@ -111,7 +111,7 @@ class ManifestTest extends TestCase
 
         try {
             $updates = Manifest::loadFile($file)->getUpdates();
-        } catch (JsonException $exception) {
+        } catch (JSONException $exception) {
             print_r($exception->getErrors());
             throw $exception;
         }
